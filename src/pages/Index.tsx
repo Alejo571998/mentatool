@@ -82,6 +82,73 @@ const categories: ToolCategory[] = [
       { name: "Notion", url: "https://notion.so", description: "Organización y documentación" },
     ],
   },
+  {
+    title: "🧪 Testing y QA",
+    tools: [
+      { name: "Vitest", url: "https://vitest.dev", description: "Framework de testing rápido para Vite" },
+      { name: "Playwright", url: "https://playwright.dev", description: "Testing end-to-end para navegadores" },
+      { name: "Cypress", url: "https://cypress.io", description: "Testing E2E y de componentes" },
+      { name: "Testing Library", url: "https://testing-library.com", description: "Utilidades de testing centradas en el usuario" },
+      { name: "Lighthouse", url: "https://developer.chrome.com/docs/lighthouse", description: "Auditoría de rendimiento y accesibilidad" },
+    ],
+  },
+  {
+    title: "🔍 SEO y Rendimiento",
+    tools: [
+      { name: "PageSpeed Insights", url: "https://pagespeed.web.dev", description: "Análisis de velocidad de Google" },
+      { name: "GTmetrix", url: "https://gtmetrix.com", description: "Test de rendimiento web" },
+      { name: "Ahrefs Webmaster Tools", url: "https://ahrefs.com/webmaster-tools", description: "Auditoría SEO gratuita" },
+      { name: "Schema.org", url: "https://schema.org", description: "Referencia de datos estructurados" },
+      { name: "Metatags.io", url: "https://metatags.io", description: "Previsualizador de meta tags" },
+    ],
+  },
+  {
+    title: "♿ Accesibilidad",
+    tools: [
+      { name: "WAVE", url: "https://wave.webaim.org", description: "Evaluador de accesibilidad web" },
+      { name: "axe DevTools", url: "https://www.deque.com/axe/devtools", description: "Extensión para testing de a11y" },
+      { name: "Contrast Checker", url: "https://webaim.org/resources/contrastchecker", description: "Verificador de contraste de colores" },
+      { name: "A11y Project", url: "https://www.a11yproject.com", description: "Guía de accesibilidad web" },
+    ],
+  },
+  {
+    title: "🤖 IA y Asistentes de Código",
+    tools: [
+      { name: "ChatGPT", url: "https://chat.openai.com", description: "Asistente IA de OpenAI" },
+      { name: "GitHub Copilot", url: "https://github.com/features/copilot", description: "Autocompletado IA para código" },
+      { name: "Claude", url: "https://claude.ai", description: "Asistente IA de Anthropic" },
+      { name: "v0 by Vercel", url: "https://v0.dev", description: "Generador de UI con IA" },
+      { name: "Lovable", url: "https://lovable.dev", description: "Construye apps web con IA" },
+    ],
+  },
+  {
+    title: "📚 Aprendizaje y Documentación",
+    tools: [
+      { name: "MDN Web Docs", url: "https://developer.mozilla.org", description: "Documentación web de referencia" },
+      { name: "freeCodeCamp", url: "https://freecodecamp.org", description: "Aprende a programar gratis" },
+      { name: "CSS-Tricks", url: "https://css-tricks.com", description: "Artículos y guías de CSS" },
+      { name: "JavaScript.info", url: "https://javascript.info", description: "Tutorial moderno de JavaScript" },
+      { name: "Web.dev", url: "https://web.dev", description: "Guías de Google para la web moderna" },
+    ],
+  },
+  {
+    title: "🔒 Seguridad Web",
+    tools: [
+      { name: "OWASP", url: "https://owasp.org", description: "Proyecto de seguridad de apps web" },
+      { name: "SecurityHeaders", url: "https://securityheaders.com", description: "Análisis de cabeceras de seguridad" },
+      { name: "SSL Labs", url: "https://www.ssllabs.com/ssltest", description: "Test de certificados SSL" },
+      { name: "Snyk", url: "https://snyk.io", description: "Escaneo de vulnerabilidades en dependencias" },
+    ],
+  },
+  {
+    title: "📱 Responsive y Mobile",
+    tools: [
+      { name: "Responsively", url: "https://responsively.app", description: "Navegador para desarrollo responsive" },
+      { name: "Viewport Resizer", url: "https://viewportresizer.com", description: "Tester de viewports" },
+      { name: "BrowserStack", url: "https://browserstack.com", description: "Testing en navegadores y dispositivos reales" },
+      { name: "Capacitor", url: "https://capacitorjs.com", description: "Apps nativas desde código web" },
+    ],
+  },
 ];
 
 const Index = () => {
