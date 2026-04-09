@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Plus, Pencil, Trash2, Settings } from "lucide-react";
+import linkedinLogo from "@/assets/linkedin.png";
+import cafecitoLogo from "@/assets/cafecito.png";
+import paypalLogo from "@/assets/paypal.png";
 import logo from "@/assets/logo.png";
 import { useCategories, useAddCategory, useUpdateCategory, useDeleteCategory, useAddTool, useUpdateTool, useDeleteTool } from "@/hooks/useCategories";
 import { ToolFormDialog } from "@/components/ToolFormDialog";
@@ -225,10 +228,39 @@ const Index = () => {
         )}
       </main>
 
-      <footer className="border-t border-border py-6 mt-12">
-        <p className="text-center text-sm text-muted-foreground">
-          Mentatools — Tu caja de herramientas para desarrollo web
-        </p>
+      <footer className="border-t border-border py-8 mt-12">
+        <div className="container max-w-3xl mx-auto px-4 space-y-6">
+          {/* Alejo */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <p className="text-sm text-muted-foreground">Aporte realizado por Alejo Morales</p>
+            <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="icon" className="h-8 w-8">
+                <img src={linkedinLogo} alt="LinkedIn" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
+              </Button>
+            </a>
+          </div>
+          {/* Cafecito */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <p className="text-sm text-muted-foreground">Si te sirvió el contenido de esta página podés invitarme un cafecito</p>
+            <a href="https://cafecito.app/mentacafecito" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="icon" className="h-8 w-8">
+                <img src={cafecitoLogo} alt="Cafecito" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
+              </Button>
+            </a>
+          </div>
+          {/* PayPal */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <p className="text-sm text-muted-foreground">Si estás fuera de Argentina y querés colaborar con un aporte, podés hacerlo por medio de PayPal</p>
+            <a href="https://paypal.me/AlejoMenta" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="icon" className="h-8 w-8">
+                <img src={paypalLogo} alt="PayPal" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
+              </Button>
+            </a>
+          </div>
+          <p className="text-center text-xs text-muted-foreground pt-4">
+            Mentatools — Tu caja de herramientas para desarrollo web
+          </p>
+        </div>
       </footer>
 
       {/* Category Dialog */}
