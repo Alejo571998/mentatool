@@ -90,15 +90,6 @@ const Index = () => {
               <p className="text-muted-foreground -mt-0.5 tracking-wide uppercase text-lg text-center">Herramientas para el desarrollo web</p>
             </div>
           </div>
-          <Button
-            variant={editMode ? "default" : "outline"}
-            size="sm"
-            className="rounded-full"
-            onClick={() => setEditMode(!editMode)}
-          >
-            <Settings className="h-4 w-4 mr-1" />
-            {editMode ? "Listo" : "Editar"}
-          </Button>
         </div>
       </header>
 
