@@ -231,7 +231,7 @@ const Index = () => {
       <footer className="border-t border-border py-8 mt-12">
         <div className="container max-w-3xl mx-auto px-4 space-y-6">
           {/* Alejo */}
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="gap-3 flex-wrap text-center flex items-center justify-center">
             <p className="text-sm text-muted-foreground">Aporte realizado por Alejo Morales</p>
             <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="icon" className="h-8 w-8">
@@ -240,7 +240,7 @@ const Index = () => {
             </a>
           </div>
           {/* Cafecito */}
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="gap-3 flex-wrap flex items-center justify-center">
             <p className="text-sm text-muted-foreground">Si te sirvió el contenido de esta página podés invitarme un cafecito</p>
             <a href="https://cafecito.app/mentacafecito" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="icon" className="h-8 w-8">
@@ -249,7 +249,7 @@ const Index = () => {
             </a>
           </div>
           {/* PayPal */}
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="gap-3 flex-wrap flex items-center justify-center">
             <p className="text-sm text-muted-foreground">Si estás fuera de Argentina y querés colaborar con un aporte, podés hacerlo por medio de PayPal</p>
             <a href="https://paypal.me/AlejoMenta" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="icon" className="h-8 w-8">
