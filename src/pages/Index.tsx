@@ -87,7 +87,7 @@ const Index = () => {
               <h1 className="font-bold text-foreground tracking-tight text-center text-3xl">
                 MENTATOOLS
               </h1>
-              <p className="text-muted-foreground -mt-0.5 tracking-wide uppercase text-lg">Herramientas para el desarrollo web</p>
+              <p className="text-muted-foreground -mt-0.5 tracking-wide uppercase text-lg text-center">Herramientas para el desarrollo web</p>
             </div>
           </div>
           <Button
