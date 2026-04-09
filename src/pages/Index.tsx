@@ -77,17 +77,17 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-border/60 bg-card/70 backdrop-blur-xl">
-        <div className="container max-w-3xl mx-auto py-5 px-4 flex items-center justify-between">
+        <div className="container max-w-3xl mx-auto py-5 px-4 items-center justify-between flex flex-col">
           <div className="flex items-center gap-3">
             <div className="relative">
               <div className="absolute -inset-1 rounded-full bg-primary/20 blur-md" />
               <img src={logo} alt="Mentatools logo" className="relative h-9 w-9 rounded-full object-cover ring-2 ring-primary/30" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground tracking-tight">
-                Mentatools
+              <h1 className="font-bold text-foreground tracking-tight text-center text-3xl">
+                MENTATOOLS
               </h1>
-              <p className="text-[11px] text-muted-foreground -mt-0.5 tracking-wide uppercase">Dev Toolkit</p>
+              <p className="text-muted-foreground -mt-0.5 tracking-wide uppercase text-lg">Herramientas para el desarrollo web</p>
             </div>
           </div>
           <Button
