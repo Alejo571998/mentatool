@@ -79,7 +79,7 @@ const Index = () => {
       <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container max-w-3xl mx-auto py-6 px-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Wrench className="h-7 w-7 text-primary" />
+            <img src={logo} alt="Mentatools logo" className="h-8 w-8 rounded-full object-cover" />
             <h1 className="text-2xl font-bold text-foreground tracking-tight">Mentatools</h1>
           </div>
           <Button
