@@ -95,7 +95,7 @@ const Index = () => {
 
       <main className="container max-w-3xl mx-auto py-8 px-4">
         <p className="text-muted-foreground mb-8">
-          Colección de herramientas útiles para el desarrollo web, organizadas por categoría.
+          Colección de herramientas útiles para realizar tu sitio web y programar.
         </p>
 
         {isLoading ? (
