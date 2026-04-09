@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Wrench, Plus, Pencil, Trash2, Settings } from "lucide-react";
+import { ExternalLink, Plus, Pencil, Trash2, Settings } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { useCategories, useAddCategory, useUpdateCategory, useDeleteCategory, useAddTool, useUpdateTool, useDeleteTool } from "@/hooks/useCategories";
 import { ToolFormDialog } from "@/components/ToolFormDialog";
 import { CategoryFormDialog } from "@/components/CategoryFormDialog";
