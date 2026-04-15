@@ -1,19 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Plus, Pencil, Trash2, Settings, Sparkles } from "lucide-react";
+import { ExternalLink, Plus, Pencil, Trash2, Settings, Sparkles, Palette, LogOut } from "lucide-react";
 import linkedinLogo from "@/assets/linkedin.png";
 import cafecitoLogo from "@/assets/cafecito.png";
 import paypalLogo from "@/assets/paypal.png";
 import logo from "@/assets/logo.png";
 import { useCategories, useAddCategory, useUpdateCategory, useDeleteCategory, useAddTool, useUpdateTool, useDeleteTool } from "@/hooks/useCategories";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { ToolFormDialog } from "@/components/ToolFormDialog";
 import { CategoryFormDialog } from "@/components/CategoryFormDialog";
+import { AdminPasswordDialog } from "@/components/AdminPasswordDialog";
+import { CustomizationPanel } from "@/components/CustomizationPanel";
 import type { Tables } from "@/integrations/supabase/types";
 import { toast } from "sonner";
 
+function hexToHsl(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
+}
+
 const Index = () => {
   const { data: categories, isLoading } = useCategories();
+  const { data: siteSettings } = useSiteSettings();
   const addCategory = useAddCategory();
   const updateCategory = useUpdateCategory();
   const deleteCategory = useDeleteCategory();
@@ -22,11 +45,32 @@ const Index = () => {
   const deleteTool = useDeleteTool();
 
   const [editMode, setEditMode] = useState(false);
+  const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
+  const [customizationOpen, setCustomizationOpen] = useState(false);
   const [catDialogOpen, setCatDialogOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Tables<"categories"> | null>(null);
   const [toolDialogOpen, setToolDialogOpen] = useState(false);
   const [editingTool, setEditingTool] = useState<Tables<"tools"> | null>(null);
   const [toolCategoryId, setToolCategoryId] = useState<string>("");
+
+  // Apply custom colors from settings
+  useEffect(() => {
+    if (!siteSettings) return;
+    const root = document.documentElement;
+    const colorMap: Record<string, string> = {
+      color_background: "--background",
+      color_card: "--card",
+      color_primary: "--primary",
+      color_accent: "--accent",
+      color_border: "--border",
+    };
+    Object.entries(colorMap).forEach(([settingKey, cssVar]) => {
+      const hex = siteSettings[settingKey];
+      if (hex) {
+        root.style.setProperty(cssVar, hexToHsl(hex));
+      }
+    });
+  }, [siteSettings]);
 
   const handleAddCategory = (title: string) => {
     const maxOrder = Math.max(0, ...(categories?.map((c) => c.sort_order) ?? []));
@@ -77,18 +121,33 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-border/60 bg-card/70 backdrop-blur-xl">
-        <div className="container max-w-3xl mx-auto py-5 px-4 items-center justify-between flex flex-col">
+        <div className="container max-w-3xl mx-auto py-5 px-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative">
               <div className="absolute -inset-1 rounded-full bg-primary/20 blur-md" />
               <img src={logo} alt="Mentatools logo" className="relative h-9 w-9 rounded-full object-cover ring-2 ring-primary/30" />
             </div>
             <div>
-              <h1 className="font-bold text-foreground tracking-tight text-center text-3xl">
-                MENTATOOLS
-              </h1>
-              <p className="text-muted-foreground -mt-0.5 tracking-wide uppercase text-lg text-center">Herramientas para el desarrollo web</p>
+              <h1 className="font-bold text-foreground tracking-tight text-3xl">MENTATOOLS</h1>
+              <p className="text-muted-foreground -mt-0.5 tracking-wide uppercase text-lg">Herramientas para el desarrollo web</p>
             </div>
+          </div>
+          <div className="flex items-center gap-1">
+            {editMode && (
+              <>
+                <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full" onClick={() => setCustomizationOpen(true)} title="Personalizar colores">
+                  <Palette className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full text-destructive" onClick={() => { setEditMode(false); toast.info("Modo edición desactivado"); }} title="Salir del modo edición">
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </>
+            )}
+            {!editMode && (
+              <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full opacity-30 hover:opacity-100 transition-opacity" onClick={() => setPasswordDialogOpen(true)} title="Modo edición">
+                <Settings className="h-4 w-4" />
+              </Button>
+            )}
           </div>
         </div>
       </header>
@@ -149,16 +208,10 @@ const Index = () => {
                     <ul className="space-y-1.5 pb-2">
                       {category.tools.map((tool) => (
                         <li key={tool.id} className="flex items-center gap-2">
-                          <a
-                            href={tool.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 transition-all group flex-1"
-                          >
+                          <a href={tool.url} target="_blank" rel="noopener noreferrer"
+                            className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 transition-all group flex-1">
                             <div>
-                              <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                                {tool.name}
-                              </span>
+                              <span className="font-medium text-foreground group-hover:text-primary transition-colors">{tool.name}</span>
                               <p className="text-sm text-muted-foreground mt-0.5">{tool.description}</p>
                             </div>
                             <ExternalLink className="h-4 w-4 text-muted-foreground/50 group-hover:text-primary shrink-0 ml-3 transition-colors" />
@@ -234,10 +287,12 @@ const Index = () => {
         </div>
       </footer>
 
+      {/* Dialogs */}
+      <AdminPasswordDialog open={passwordDialogOpen} onOpenChange={setPasswordDialogOpen} onSuccess={() => setEditMode(true)} />
+      <CustomizationPanel open={customizationOpen} onOpenChange={setCustomizationOpen} settings={siteSettings ?? {}} />
       <CategoryFormDialog open={catDialogOpen} onOpenChange={setCatDialogOpen}
         onSubmit={editingCategory ? handleEditCategory : handleAddCategory}
         initial={editingCategory?.title} title={editingCategory ? "Editar categoría" : "Nueva categoría"} />
-
       <ToolFormDialog open={toolDialogOpen} onOpenChange={setToolDialogOpen}
         onSubmit={editingTool ? handleEditTool : handleAddTool}
         initial={editingTool ? { name: editingTool.name, url: editingTool.url, description: editingTool.description } : undefined}
