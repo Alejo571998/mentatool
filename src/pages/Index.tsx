@@ -73,7 +73,7 @@ const Index = () => {
                     {category.tools.map((tool) => (
                       <li key={tool.id}>
                         <a href={tool.url} target="_blank" rel="noopener noreferrer"
-                          className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/5 transition-all group">
+                          className="flex items-center justify-between p-3 rounded-xl hover:bg-muted/30 transition-all group">
                           <div>
                             <span className="font-medium text-foreground group-hover:text-primary transition-colors">{tool.name}</span>
                             <p className="text-sm text-muted-foreground mt-0.5">{tool.description}</p>
