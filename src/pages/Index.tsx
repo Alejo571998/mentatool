@@ -33,7 +33,7 @@ const Index = () => {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="container max-w-3xl mx-auto pt-12 pb-8 px-4 relative">
-          <div className="rounded-2xl bg-background/60 backdrop-blur-md p-6">
+          <div className="rounded-2xl bg-background/60 backdrop-blur-md p-6 flex flex-col items-center text-center">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="h-4 w-4 text-primary" />
               <span className="text-xs font-semibold text-primary uppercase tracking-widest">Recursos curados</span>
