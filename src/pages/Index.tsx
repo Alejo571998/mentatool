@@ -96,7 +96,7 @@ const Index = () => {
           <div className="gap-3 flex-wrap text-center flex items-center justify-center">
             <p className="text-sm text-muted-foreground">Aporte realizado por Alejo Morales</p>
             <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="icon" className="h-8 w-8 rounded-full">
+              <Button variant="outline" size="icon" className="h-8 w-8 rounded-full hover:bg-muted/30 hover:text-foreground">
                 <img src={linkedinLogo} alt="LinkedIn" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
               </Button>
             </a>
