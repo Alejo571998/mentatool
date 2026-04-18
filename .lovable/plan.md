@@ -1,26 +1,22 @@
 
-## Promover a alejonm30@gmail.com como admin
 
-Encontré el usuario en la base de datos:
-- **Email**: alejonm30@gmail.com
-- **UUID**: `29ebf269-79d8-45b6-b05c-b0dbfd826bcb`
+Plan: agregar flujo "olvidé mi contraseña".
 
-### Plan
-Crear una migración SQL que inserte una fila en `user_roles` asignándole el rol `admin` a este usuario.
+## Cambios
 
-```sql
-INSERT INTO public.user_roles (user_id, role)
-VALUES ('29ebf269-79d8-45b6-b05c-b0dbfd826bcb', 'admin')
-ON CONFLICT (user_id, role) DO NOTHING;
-```
+1. **`src/pages/Auth.tsx`**: agregar enlace "¿Olvidaste tu contraseña?" debajo del formulario de login que abre un diálogo (Dialog) con un input de email y botón "Enviar enlace". Llama a `supabase.auth.resetPasswordForEmail(email, { redirectTo: ${window.location.origin}/reset-password })` y muestra toast de confirmación.
 
-Uso `ON CONFLICT DO NOTHING` por seguridad, en caso de que el rol ya exista.
+2. **`src/pages/ResetPassword.tsx`** (nuevo): página pública con formulario de nueva contraseña + confirmación. 
+   - Detecta el evento `PASSWORD_RECOVERY` vía `supabase.auth.onAuthStateChange` (Supabase procesa automáticamente el token del hash de la URL).
+   - Si no hay sesión de recovery, muestra mensaje "Enlace inválido o expirado" con link a `/auth`.
+   - Al enviar, llama a `supabase.auth.updateUser({ password })`, muestra toast y redirige a `/`.
+   - Valida que las dos contraseñas coincidan y mínimo 6 caracteres.
 
-### Después de aprobar
-Una vez aplicada la migración, vas a poder:
-1. Hacer login en `/auth` con tu cuenta alejonm30@gmail.com
-2. El hook `useAuth` detectará `isAdmin = true`
-3. Las políticas RLS te permitirán crear/editar/borrar categorías, herramientas y site_settings
+3. **`src/App.tsx`**: registrar la ruta `/reset-password` antes de la catch-all.
 
-### Próximo paso recomendado
-Todavía no existe una UI de admin. Después de promoverte, lo lógico es construir un panel en `/admin` con formularios para gestionar el contenido.
+## Notas técnicas
+
+- La URL de reset debe estar en la lista de Redirect URLs permitidas. Lovable Cloud por defecto acepta el origin del preview, así que debería funcionar sin config extra.
+- Los emails de auth usarán las plantillas por defecto de Lovable (no hace falta configurar dominio personalizado para que funcione).
+- El usuario `alejonm30@gmail.com` recibirá el email en esa casilla.
+
