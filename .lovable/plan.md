@@ -1,32 +1,26 @@
 
+## Promover a alejonm30@gmail.com como admin
 
-## Plan: Botón de edición protegido con contraseña simple
+Encontré el usuario en la base de datos:
+- **Email**: alejonm30@gmail.com
+- **UUID**: `29ebf269-79d8-45b6-b05c-b0dbfd826bcb`
 
-### Cómo funcionará
-- Un botón discreto (ícono de engranaje) en el header
-- Al clickearlo, aparece un diálogo pidiendo una contraseña
-- Si la contraseña es correcta, se activa el modo edición con todos los controles CRUD
-- La contraseña se valida en un edge function del backend para que no quede expuesta en el código del navegador
+### Plan
+Crear una migración SQL que inserte una fila en `user_roles` asignándole el rol `admin` a este usuario.
 
-### Pasos técnicos
+```sql
+INSERT INTO public.user_roles (user_id, role)
+VALUES ('29ebf269-79d8-45b6-b05c-b0dbfd826bcb', 'admin')
+ON CONFLICT (user_id, role) DO NOTHING;
+```
 
-1. **Crear un secret** para almacenar la contraseña de admin (ej: `ADMIN_PASSWORD`)
+Uso `ON CONFLICT DO NOTHING` por seguridad, en caso de que el rol ya exista.
 
-2. **Crear edge function `verify-admin`** que reciba la contraseña, la compare con el secret, y devuelva `{ valid: true/false }`
+### Después de aprobar
+Una vez aplicada la migración, vas a poder:
+1. Hacer login en `/auth` con tu cuenta alejonm30@gmail.com
+2. El hook `useAuth` detectará `isAdmin = true`
+3. Las políticas RLS te permitirán crear/editar/borrar categorías, herramientas y site_settings
 
-3. **Modificar `src/pages/Index.tsx`**:
-   - Agregar botón de engranaje (Settings icon) en el header
-   - Crear diálogo con input de contraseña
-   - Al verificar correctamente, activar `editMode`
-   - Mostrar los controles de edición (añadir/editar/eliminar categorías y herramientas) solo en modo edición
-
-4. **Agregar página/panel de personalización** (colores e imágenes):
-   - Crear tabla `site_settings` en la base de datos para guardar configuraciones de colores e imágenes
-   - Crear un panel accesible solo en modo edición para cambiar colores de fondo, colores primarios, y las imágenes/logos
-   - Los cambios se guardan en la base de datos y se aplican al cargar la página
-
-### Seguridad
-- La contraseña nunca se expone en el frontend
-- La validación ocurre server-side en el edge function
-- Las RLS de `site_settings` permitirán lectura pública pero escritura solo validando la contraseña (o escritura pública como las demás tablas, dado que el acceso al modo edición ya está protegido)
-
+### Próximo paso recomendado
+Todavía no existe una UI de admin. Después de promoverte, lo lógico es construir un panel en `/admin` con formularios para gestionar el contenido.
