@@ -24,20 +24,23 @@ const Index = () => {
             <img src={logo} alt="Mentatools logo" className="relative h-9 w-9 rounded-full object-cover ring-2 ring-primary/30" />
           </div>
           <div>
-            <h1 className="font-bold text-foreground tracking-tight text-3xl text-center">MENTATOOLS</h1>
+            <h1 className="font-bold text-foreground tracking-tight text-3xl text-center">
+              MENTATOOLS <span className="sr-only">— Herramientas para el desarrollo web</span>
+            </h1>
             <p className="text-muted-foreground -mt-0.5 tracking-wide uppercase text-lg">Herramientas para el desarrollo web</p>
           </div>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section aria-labelledby="hero-heading" className="relative overflow-hidden">
         <div className="container max-w-3xl mx-auto pt-12 pb-8 px-4 relative">
           <div className="rounded-2xl bg-background/60 backdrop-blur-md p-6 flex flex-col items-center text-center">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="h-4 w-4 text-primary" />
               <span className="text-xs font-semibold text-primary uppercase tracking-widest">Recursos curados</span>
             </div>
+            <h2 id="hero-heading" className="sr-only">Recursos curados</h2>
             <p className="text-muted-foreground text-lg leading-relaxed max-w-xl text-center">
               Colección de herramientas útiles para realizar tu sitio web y programar.
             </p>
@@ -47,6 +50,7 @@ const Index = () => {
 
       {/* Content */}
       <main className="container max-w-3xl mx-auto py-6 px-4">
+        <h2 className="sr-only">Herramientas por categoría</h2>
         {isLoading ? (
           <div className="text-center py-16">
             <div className="inline-flex items-center gap-2 text-muted-foreground bg-background/60 backdrop-blur-md rounded-full px-4 py-2">
@@ -95,25 +99,25 @@ const Index = () => {
         <div className="container max-w-3xl mx-auto px-4 space-y-5">
           <div className="gap-3 flex-wrap text-center flex items-center justify-center">
             <p className="text-sm text-muted-foreground">Aporte realizado por Alejo Morales</p>
-            <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de Alejo Morales">
               <Button variant="outline" size="icon" className="h-8 w-8 rounded-full hover:bg-muted/30 hover:text-foreground">
-                <img src={linkedinLogo} alt="LinkedIn" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
+                <img src={linkedinLogo} alt="Perfil de LinkedIn" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
               </Button>
             </a>
           </div>
           <div className="gap-3 flex-wrap flex items-center justify-center text-center">
             <p className="text-sm text-muted-foreground">Si te sirvió el contenido de esta página podés invitarme un cafecito</p>
-            <a href="https://cafecito.app/mentacafecito" target="_blank" rel="noopener noreferrer">
+            <a href="https://cafecito.app/mentacafecito" target="_blank" rel="noopener noreferrer" aria-label="Invitar un cafecito en Cafecito">
               <Button variant="outline" size="icon" className="h-8 w-8 rounded-full hover:bg-muted/30 hover:text-foreground">
-                <img src={cafecitoLogo} alt="Cafecito" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
+                <img src={cafecitoLogo} alt="Invitar un cafecito" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
               </Button>
             </a>
           </div>
           <div className="gap-3 flex-wrap flex items-center justify-center text-center">
             <p className="text-sm text-muted-foreground">Si estás fuera de Argentina y querés colaborar con un aporte, podés hacerlo por medio de PayPal</p>
-            <a href="https://paypal.me/AlejoMenta" target="_blank" rel="noopener noreferrer">
+            <a href="https://paypal.me/AlejoMenta" target="_blank" rel="noopener noreferrer" aria-label="Donar vía PayPal">
               <Button variant="outline" size="icon" className="h-8 w-8 rounded-full hover:bg-muted/30 hover:text-foreground">
-                <img src={paypalLogo} alt="PayPal" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
+                <img src={paypalLogo} alt="Donar vía PayPal" className="h-5 w-5 object-contain" loading="lazy" width={512} height={512} />
               </Button>
             </a>
           </div>
