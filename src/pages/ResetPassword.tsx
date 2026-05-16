@@ -62,8 +62,10 @@ const ResetPassword = () => {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Nueva contraseña</CardTitle>
-          <CardDescription>Ingresá tu nueva contraseña</CardDescription>
+          <CardTitle asChild className="text-2xl">
+            <h1>Nueva contraseña</h1>
+          </CardTitle>
+          <CardDescription>Ingresá tu nueva contraseña para MentaTools</CardDescription>
         </CardHeader>
         <CardContent>
           {invalid && !ready ? (
