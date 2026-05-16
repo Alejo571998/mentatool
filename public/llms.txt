@@ -1,0 +1,9 @@
+# MentaTools
+
+> Colección curada de herramientas útiles para diseñar, programar y lanzar sitios web, organizada por categoría.
+
+MentaTools es un directorio en español mantenido por Alejo Morales con recursos para desarrollo web: editores, generadores, assets, frameworks y utilidades de productividad.
+
+## Pages
+
+- [Inicio](/): Listado de categorías y herramientas para desarrollo web.
