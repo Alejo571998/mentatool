@@ -73,9 +73,7 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle asChild className="text-2xl">
-            <h1>Mentatools — Acceso de administrador</h1>
-          </CardTitle>
+          <h1 className="text-2xl font-semibold leading-none tracking-tight">Mentatools — Acceso de administrador</h1>
           <CardDescription>Iniciá sesión o creá tu cuenta</CardDescription>
         </CardHeader>
         <CardContent>
