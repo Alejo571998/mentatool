@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,9 @@ import { useAuth } from "@/hooks/useAuth";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const rawNext = searchParams.get("next");
+  const next = rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/";
   const { session, loading: authLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,8 +40,10 @@ const Auth = () => {
   };
 
   useEffect(() => {
-    if (!authLoading && session) navigate("/");
-  }, [session, authLoading, navigate]);
+    if (!authLoading && session) {
+      window.location.href = next;
+    }
+  }, [session, authLoading, next]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,14 +53,14 @@ const Auth = () => {
     if (error) {
       toast({ title: "Error al iniciar sesión", description: error.message, variant: "destructive" });
     } else {
-      navigate("/");
+      window.location.href = next;
     }
   };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const redirectUrl = `${window.location.origin}/`;
+    const redirectUrl = `${window.location.origin}${next}`;
     const { error } = await supabase.auth.signUp({
       email,
       password,
